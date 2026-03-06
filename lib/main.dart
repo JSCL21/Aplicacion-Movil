@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Screens/HomeScreen.dart';
+import 'Screens/LoginScreen.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -120,7 +121,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           context,
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) => 
-              const HomeScreen(userId: 1),
+              const LoginScreen(),
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(opacity: animation, child: child);
             },
@@ -129,6 +130,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         );
       }
     });
+
   }
 
   @override

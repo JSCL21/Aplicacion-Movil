@@ -12,23 +12,35 @@ class CarbonCalculatorService {
     TransportType.scooter: 0.05,   // 50g CO2/km (eléctrico)
   };
 
-  // Emisiones de CO2 por tipo de alimento (kg CO2 por porción)
-  static const Map<String, double> emisionesAlimento = {
-    'carne_res': 27.0,      // 27 kg CO2 por kg
-    'carne_pollo': 6.9,     // 6.9 kg CO2 por kg
-    'pescado': 5.0,        // 5 kg CO2 por kg
-    'huevos': 4.8,          // 4.8 kg CO2 por kg
-    'leche': 3.2,           // 3.2 kg CO2 por kg
-    'arroz': 2.7,           // 2.7 kg CO2 por kg
-    'vegetales': 0.4,       // 0.4 kg CO2 por kg
-    'frutas': 0.5,          // 0.5 kg CO2 por kg
-    'legumbres': 0.9,       // 0.9 kg CO2 por kg
+  // Emisiones de CO2 por tipo de energia (kg CO2 por unidad)
+  static const Map<EnergyType, double> emisionesEnergia = {
+    EnergyType.electricidad: 0.5,   // 0.5 kg CO2/kWh (mix promedio)
+    EnergyType.gas_natural: 2.0,    // 2 kg CO2/m³
+    EnergyType.gasolina: 2.3,      // 2.3 kg CO2/litro
   };
 
-  // Emisiones de CO2 por tipo de energía (kg CO2 por kWh)
-  static const double emisionesElectricidad = 0.5; // 0.5 kg CO2/kWh (mix promedio)
-  static const double emisionesGasNatural = 2.0;   // 2 kg CO2/m³
-  static const double emisionesGasolina = 2.3;    // 2.3 kg CO2/litro
+  // Emisiones de CO2 por tipo de alimento (kg CO2 por kg)
+  static const Map<FoodType, double> emisionesAlimento = {
+    FoodType.carne_res: 27.0,      // 27 kg CO2 por kg
+    FoodType.carne_pollo: 6.9,     // 6.9 kg CO2 por kg
+    FoodType.pescado: 5.0,         // 5 kg CO2 por kg
+    FoodType.huevos: 4.8,          // 4.8 kg CO2 por kg
+    FoodType.leche: 3.2,           // 3.2 kg CO2 por kg
+    FoodType.arroz: 2.7,           // 2.7 kg CO2 por kg
+    FoodType.vegetales: 0.4,       // 0.4 kg CO2 por kg
+    FoodType.frutas: 0.5,          // 0.5 kg CO2 por kg
+    FoodType.legumbres: 0.9,       // 0.9 kg CO2 por kg
+  };
+
+  // Emisiones de CO2 por tipo de producto (kg CO2 por kg)
+  static const Map<ProductType, double> emisionesProducto = {
+    ProductType.electronicos: 50.0,  // 50 kg CO2 por kg (alto impacto)
+    ProductType.ropa: 10.0,          // 10 kg CO2 por kg
+    ProductType.plastico: 6.0,       // 6 kg CO2 por kg
+    ProductType.papel: 1.5,         // 1.5 kg CO2 por kg
+    ProductType.vidrio: 1.0,         // 1 kg CO2 por kg
+    ProductType.metal: 8.0,         // 8 kg CO2 por kg
+  };
 
   /// Calcula las emisiones de CO2 para una actividad de transporte
   static double calcularEmisionesTransporte(TransportType tipo, double distanciaKm) {
@@ -37,13 +49,20 @@ class CarbonCalculatorService {
   }
 
   /// Calcula las emisiones de CO2 para actividades de energía
-  static double calcularEmisionesEnergia(double kWh) {
-    return kWh * emisionesElectricidad;
+  static double calcularEmisionesEnergia(EnergyType tipo, double cantidad) {
+    final factorEmision = emisionesEnergia[tipo] ?? 0.0;
+    return cantidad * factorEmision;
   }
 
   /// Calcula las emisiones de CO2 para alimentos
-  static double calcularEmisionesAlimento(String tipoAlimento, double cantidadKg) {
-    final factorEmision = emisionesAlimento[tipoAlimento] ?? 0.0;
+  static double calcularEmisionesAlimento(FoodType tipo, double cantidadKg) {
+    final factorEmision = emisionesAlimento[tipo] ?? 0.0;
+    return cantidadKg * factorEmision;
+  }
+
+  /// Calcula las emisiones de CO2 para productos
+  static double calcularEmisionesProducto(ProductType tipo, double cantidadKg) {
+    final factorEmision = emisionesProducto[tipo] ?? 0.0;
     return cantidadKg * factorEmision;
   }
 
@@ -111,3 +130,4 @@ class CarbonCalculatorService {
     }
   }
 }
+

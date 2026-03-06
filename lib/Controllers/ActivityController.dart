@@ -14,12 +14,29 @@ class ActivityController {
     int puntos = 0;
 
     if (actividad.type == ActivityType.transporte && actividad.transportType != null) {
+      // Transporte - cantidad en km
       emisiones = CarbonCalculatorService.calcularEmisionesTransporte(
         actividad.transportType!,
-        actividad.distancia,
+        actividad.cantidad,
       );
-    } else if (actividad.type == ActivityType.energia) {
-      emisiones = CarbonCalculatorService.calcularEmisionesEnergia(actividad.distancia);
+    } else if (actividad.type == ActivityType.energia && actividad.energyType != null) {
+      // Energía - cantidad según tipo
+      emisiones = CarbonCalculatorService.calcularEmisionesEnergia(
+        actividad.energyType!,
+        actividad.cantidad,
+      );
+    } else if (actividad.type == ActivityType.alimento && actividad.foodType != null) {
+      // Alimento - cantidad en kg
+      emisiones = CarbonCalculatorService.calcularEmisionesAlimento(
+        actividad.foodType!,
+        actividad.cantidad,
+      );
+    } else if (actividad.type == ActivityType.producto && actividad.productType != null) {
+      // Producto - cantidad en kg
+      emisiones = CarbonCalculatorService.calcularEmisionesProducto(
+        actividad.productType!,
+        actividad.cantidad,
+      );
     }
 
     puntos = CarbonCalculatorService.calcularPuntos(emisiones, actividad.type);
@@ -29,8 +46,11 @@ class ActivityController {
       userId: actividad.userId,
       type: actividad.type,
       transportType: actividad.transportType,
+      energyType: actividad.energyType,
+      foodType: actividad.foodType,
+      productType: actividad.productType,
       fecha: actividad.fecha,
-      distancia: actividad.distancia,
+      cantidad: actividad.cantidad,
       emisionesCO2: emisiones,
       puntosGanados: puntos,
       descripcion: actividad.descripcion,
@@ -103,3 +123,4 @@ class ActivityController {
     _actividades.removeWhere((a) => a.id == id);
   }
 }
+

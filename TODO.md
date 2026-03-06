@@ -1,56 +1,30 @@
-# TODO - Implementación EcoTrack
+# TODO - Actualización de Iconos y Campos de Actividad
 
-## Fase 1: Configuración del Proyecto
-- [x] 1.1 Analizar propuesta y proyecto existente
-- [x] 1.2 Actualizar pubspec.yaml con dependencias
-- [ ] 1.3 Configurar Android permissions para GPS, cámara
+## Plan de Trabajo
 
-## Fase 2: Modelos de Datos
-- [x] 2.1 Crear modelo Activity (actividad)
-- [x] 2.2 Crear modelo Achievement (logro)
-- [x] 2.3 Crear modelo Challenge (reto)
-- [x] 2.4 Actualizar modelo User con campos EcoTrack
+### 1. Actualizar Activity_model.dart ✅
+- [x] Agregar EnergyType enum (electricidad, gas_natural, gasolina)
+- [x] Agregar FoodType enum (carne_res, carne_pollo, pescado, huevos, leche, arroz, vegetales, frutas, legumbres)
+- [x] Agregar ProductType enum (electronicos, ropa, plastico, papel, vidrio, metal)
+- [x] Agregar campos específicos a la clase Activity
+- [x] Actualizar método icono para devolver iconos específicos por tipo
 
-## Fase 3: Servicios
-- [x] 3.1 Crear CarbonCalculatorService
-- [x] 3.2 Crear LocationService  
-- [x] 3.3 Crear ChallengeService
-- [x] 3.4 Actualizar DbService
+### 2. Actualizar ActivityScreen.dart ✅
+- [x] Agregar selector de tipo de energía (electricidad, gas, gasolina)
+- [x] Agregar selector de tipo de alimento (carne, pescado, vegetales, etc.)
+- [x] Agregar selector de tipo de producto (electrónicos, ropa, etc.)
+- [x] Cambiar slider de distancia según el tipo de actividad
+- [x] Actualizar lógica de guardado
 
-## Fase 4: Controladores
-- [x] 4.1 Crear ActivityController
-- [x] 4.2 Crear ChallengeController
-- [x] 4.3 Actualizar UserController
+### 3. Actualizar DashboardScreen.dart ✅
+- [x] Agregar tarjeta de Alimentación (Alimento)
+- [x] Agregar tarjeta de Producto
+- [x] Mostrar los 4 tipos de actividad en el desglose
 
-## Fase 5: Pantallas (Screens)
-- [x] 5.1 Crear DashboardScreen (principal)
-- [x] 5.2 Crear ActivityScreen (registro)
-- [x] 5.3 Crear ChallengesScreen (retos/logros)
-- [ ] 5.4 Crear MapScreen (rutas)
-- [x] 5.5 Crear ProfileScreen (perfil)
-- [x] 5.6 Crear HomeScreen con navegación
+### 4. Actualizar ActivityController.dart ✅
+- [x] Agregar cálculo de emisiones para alimentos
+- [x] Agregar cálculo de emisiones para productos
 
-## Fase 6: Integración
-- [x] 6.1 Actualizar main.dart
-- [x] 6.2 Configurar tema EcoTrack
-- [x] 6.3 Probar navegación
+## Estado de Ejecución
+- [x] Completado
 
-## Estado: Completado
-La aplicación EcoTrack ha sido implementada con éxito. 
-
-Archivos creados:
-- lib/Models/Activity_model.dart
-- lib/Models/Achievement_model.dart  
-- lib/Models/Challenge_model.dart
-- lib/Services/CarbonCalculatorService.dart
-- lib/Services/LocationService.dart
-- lib/Services/ChallengeService.dart
-- lib/Controllers/ActivityController.dart
-- lib/Controllers/ChallengeController.dart
-- lib/Screens/DashboardScreen.dart
-- lib/Screens/ActivityScreen.dart
-- lib/Screens/ChallengesScreen.dart
-- lib/Screens/ProfileScreen.dart
-- lib/Screens/HomeScreen.dart
-- lib/main.dart (actualizado)
-- test/widget_test.dart (actualizado)

@@ -1,6 +1,8 @@
 import 'package:flutter_application_1/Services/db_Service.dart';
+import '../Models/User_model.dart';
 
 class UserController {
+
   final DbService _dbService = DbService();
 
   Future<List<User>> getAllUsers() async {
